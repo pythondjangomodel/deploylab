@@ -1,0 +1,25 @@
+{% extends "notes/base.html" %}
+{% block content %}
+    <a class="btn" href="{% url 'note_create' %}">+ New Note</a>
+
+    {% if notes %}
+        <div class="note-grid">
+            {% for note in notes %}
+                <div class="note-card">
+                    {% if note.image %}
+                        <img src="{{ note.image.url }}" alt="{{ note.title }}">
+                    {% endif %}
+                    <h3>{{ note.title }}</h3>
+                    <p>{{ note.content }}</p>
+                    <small>{{ note.created_at|date:"M d, Y H:i" }}</small>
+                    <form method="post" action="{% url 'note_delete' note.pk %}">
+                        {% csrf_token %}
+                        <button class="btn-delete" type="submit">Delete</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty">No notes yet. Create your first one!</p>
+    {% endif %}
+{% endblock %}
