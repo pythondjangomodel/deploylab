@@ -24,3 +24,8 @@ def note_delete(request, pk):
     if request.method == "POST":
         note.delete()
     return redirect("note_list")
+
+def note_create(request):
+
+    note = Note(user=request.user, title=title, content=content)
+    note.save()
