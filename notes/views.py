@@ -25,7 +25,7 @@ def note_delete(request, pk):
         note.delete()
     return redirect("note_list")
 
-def note_create(request):
+def notes_create(request):
 
-    note = Note(user=request.user, title=title, content=content)
-    note.save()
+    notes = Note(user=request.user, title=title, content=content)
+    notes.save()
